@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import ConsultationModal from "./consultation-modal"
 
@@ -9,6 +9,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +26,7 @@ export default function Navbar() {
 
   const scrollToSection = (sectionId: string) => {
     setIsOpen(false)
+    setServicesDropdownOpen(false)
     const element = document.getElementById(sectionId)
     if (element) {
       const offsetTop = element.getBoundingClientRect().top + window.pageYOffset
@@ -35,12 +37,20 @@ export default function Navbar() {
     }
   }
 
+  const handleServiceClick = (href?: string) => {
+    if (href) {
+      window.location.href = href
+    } else {
+      scrollToSection("service-focus")
+    }
+    setServicesDropdownOpen(false)
+    setIsOpen(false)
+  }
+
   const navItems = [
     { name: "Process", section: "how-it-works" },
     { name: "Benefits", section: "benefits" },
     { name: "Results", section: "social-proof" },
-    { name: "Services", section: "service-focus" },
-    { name: "Quilt School", section: "service-focus", href: "/bootcamp", isNew: true },
     { name: "About", section: "founder" },
     { name: "FAQ", section: "faq" },
   ]
@@ -64,29 +74,47 @@ export default function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex space-x-8 justify-center mx-auto">
               {navItems.map((item) => (
-                item.href ? (
-                  <a
-                    key={item.section}
-                    href={item.href}
-                    className="text-gray-300 hover:text-blue-400 transition-colors text-sm flex items-center gap-2"
-                  >
-                    {item.name}
-                    {item.isNew && (
-                      <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">
-                        NEW
-                      </span>
-                    )}
-                  </a>
-                ) : (
-                  <button
-                    key={item.section}
-                    onClick={() => scrollToSection(item.section)}
-                    className="text-gray-300 hover:text-blue-400 transition-colors text-sm"
-                  >
-                    {item.name}
-                  </button>
-                )
+                <button
+                  key={item.section}
+                  onClick={() => scrollToSection(item.section)}
+                  className="text-gray-300 hover:text-blue-400 transition-colors text-sm"
+                >
+                  {item.name}
+                </button>
               ))}
+              
+              {/* Services Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+                  className="text-gray-300 hover:text-blue-400 transition-colors text-sm flex items-center gap-1"
+                >
+                  Services
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+                
+                {servicesDropdownOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-gray-900 border border-gray-700 rounded-lg shadow-lg z-50">
+                    <div className="py-2">
+                      <button
+                        onClick={() => handleServiceClick()}
+                        className="w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-blue-400 transition-colors text-sm"
+                      >
+                        Quiltmind Executive
+                      </button>
+                      <button
+                        onClick={() => handleServiceClick("/quiltschool")}
+                        className="w-full text-left px-4 py-3 text-gray-300 hover:bg-gray-800 hover:text-blue-400 transition-colors text-sm flex items-center justify-between"
+                      >
+                        <span>Quiltschool</span>
+                        <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                          NEW
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             <a
@@ -112,30 +140,37 @@ export default function Navbar() {
             <div className="lg:hidden mt-4 py-4 bg-black/95 backdrop-blur-md rounded-lg shadow-lg">
               <div className="flex flex-col space-y-3">
                 {navItems.map((item) => (
-                  item.href ? (
-                    <a
-                      key={item.section}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-gray-300 hover:text-blue-400 transition-colors px-4 py-2 text-left flex items-center gap-2"
-                    >
-                      {item.name}
-                      {item.isNew && (
-                        <span className="bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">
-                          NEW
-                        </span>
-                      )}
-                    </a>
-                  ) : (
-                    <button
-                      key={item.section}
-                      onClick={() => scrollToSection(item.section)}
-                      className="text-gray-300 hover:text-blue-400 transition-colors px-4 py-2 text-left"
-                    >
-                      {item.name}
-                    </button>
-                  )
+                  <button
+                    key={item.section}
+                    onClick={() => scrollToSection(item.section)}
+                    className="text-gray-300 hover:text-blue-400 transition-colors px-4 py-2 text-left"
+                  >
+                    {item.name}
+                  </button>
                 ))}
+                
+                {/* Mobile Services */}
+                <div className="px-4 py-2">
+                  <div className="text-gray-300 text-sm font-medium mb-2">Services</div>
+                  <div className="ml-4 space-y-2">
+                    <button
+                      onClick={() => handleServiceClick()}
+                      className="block text-gray-300 hover:text-blue-400 transition-colors text-sm"
+                    >
+                      Quiltmind Executive
+                    </button>
+                    <button
+                      onClick={() => handleServiceClick("/quiltschool")}
+                      className="block text-gray-300 hover:text-blue-400 transition-colors text-sm flex items-center gap-2"
+                    >
+                      <span>Quiltschool</span>
+                      <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                        NEW
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                
                 <a
                   href="/analysis"
                   onClick={() => setIsOpen(false)}

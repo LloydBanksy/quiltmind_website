@@ -26,7 +26,7 @@ export default function ServiceFocus() {
     "Weekly Progress Tracking & Analytics",
     "Employee Recognition & Rewards System",
     "Dedicated Program Manager & Support",
-    "4-Week Intensive Program Structure",
+    "12-Week Intensive Program Structure",
     "Post-Program Resources & Continued Support",
   ]
 
@@ -96,17 +96,16 @@ export default function ServiceFocus() {
               }}
             >
               <div className="text-center mb-6">
-                <h3 className="text-xl font-bold mb-2 text-green-400">For Teams</h3>
+                <h3 className="text-xl font-bold mb-2 text-blue-400">For Teams</h3>
                 <h4 className="text-2xl font-bold mb-4 text-white">
                   Training & Empowerment
                 </h4>
-                <h5 className="text-xl font-semibold mb-4 text-green-300">
-                  Quilt School: LinkedIn Bootcamp & Contest
+                <h5 className="text-xl font-semibold mb-4 text-blue-300">
+                  Quiltschool: LinkedIn Bootcamp & Contest
                 </h5>
                 <p className="text-gray-300 mb-6">
-                  A dynamic, 4-week program designed to transform your employees into powerful brand advocates. 
-                  Through gamified training and friendly competition, your team builds authentic LinkedIn presence 
-                  while amplifying your company's reach and influence.
+                  An engaging bootcamp and contest that empowers your employees to become brand advocates. 
+                  We train your team to build influence and amplify your company's voice on LinkedIn.
                 </p>
               </div>
 
@@ -121,7 +120,7 @@ export default function ServiceFocus() {
                     }}
                   >
                     <div className="flex-shrink-0 mt-1">
-                      <Check className="h-5 w-5 text-green-500" />
+                      <Check className="h-5 w-5 text-blue-500" />
                     </div>
                     <p className="text-gray-300">{feature}</p>
                   </div>
@@ -130,10 +129,10 @@ export default function ServiceFocus() {
 
               <div className="mt-8 text-center">
                 <a
-                  href="/bootcamp"
-                  className="inline-block bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-bold transition-all shadow-lg shadow-green-700/50"
+                  href="/quiltschool"
+                  className="inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-base font-medium transition-all shadow-lg shadow-blue-700/50"
                 >
-                  Learn More About Quilt School
+                  Learn More
                 </a>
               </div>
             </div>
