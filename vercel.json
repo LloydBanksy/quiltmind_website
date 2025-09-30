@@ -1,0 +1,20 @@
+{
+  "rewrites": [
+    {
+      "source": "/bootcamp",
+      "destination": "https://quiltmind-bootcamp-dashboard.vercel.app/onboarding"
+    },
+    {
+      "source": "/bootcamp/:path*",
+      "destination": "https://quiltmind-bootcamp-dashboard.vercel.app/:path*"
+    },
+    {
+      "source": "/quiltschool/:path*",
+      "destination": "https://quiltmind-bootcamp-dashboard.vercel.app/:path*"
+    },
+    {
+      "source": "/login",
+      "destination": "https://quiltmind-bootcamp-dashboard.vercel.app/login"
+    }
+  ]
+}
